@@ -14,9 +14,9 @@ TextZen is a Markdown note-taking application for MacOS.
 
 ## Installation
 
-Get `.dmg` from the [latest release](https://github.com/MarkEdit-app/MarkEdit/releases), open it, and drag `TextZen` to Applications.
+Get `.dmg` from the [latest release](https://github.com/TextZen/TextZen/releases), open it, and drag `TextZen` to Applications.
 
-<img alt="TextZen" src="./docs/install.png" width="500">
+<img alt="Install" src="./docs/install.png" width="500">
 
 TextZen checks for updates automatically
 
@@ -76,6 +76,8 @@ You can create links to other files within the opened folder.
 ### Preview
 
 Images, links, and tables are parsed and displayed as previews in the editor.
+
+<img alt="Table" src="./docs/table.png" width="600">
 
 ## Settings
 
@@ -137,6 +139,10 @@ TextZen's CSS uses variables.
   }
 }
 ```
+
+## Privacy Policy
+
+At TextZen, we are committed to protecting the privacy of our users. Our app does not collect any personal information about its users. We do not store any user data on our servers or share it with third parties.
 
 ## Development
 
