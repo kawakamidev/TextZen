@@ -1,0 +1,30 @@
+appId: org.moeki.textzen
+productName: TextZen
+directories:
+  buildResources: build
+files:
+  - '!**/.vscode/*'
+  - '!src/*'
+  - '!electron.vite.config.{js,ts,mjs,cjs}'
+  - '!{.eslintignore,.eslintrc.cjs,.prettierignore,.prettierrc.yaml,dev-app-update.yml,CHANGELOG.md,README.md}'
+  - '!{.env,.env.*,.npmrc,pnpm-lock.yaml}'
+  - '!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}'
+asarUnpack:
+  - resources/**
+  - node_modules/@vscode/ripgrep/bin/rg
+mac:
+  entitlementsInherit: build/entitlements.mac.plist
+  notarize: true
+dmg:
+  artifactName: ${name}-${version}.${ext}
+appImage:
+  artifactName: ${name}-${version}.${ext}
+npmRebuild: false
+publish:
+  provider: github
+  owner: textzen
+  repo: textzen
+  releaseType: draft
+protocols:
+  - name: 'TextZen Protocol'
+    schemes: ['zen']
