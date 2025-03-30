@@ -1,0 +1,22 @@
+node_modules
+dist
+out
+release
+.DS_Store
+.eslintcache
+*.log*
+.env
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+/tests/test-user-data/
+/tests/notes/*
+!/tests/notes/example.md
+!/tests/notes/example2.md
+!/tests/notes/.text-zen
+!/tests/notes/lena.png
+!/tests/notes/mermaid.md

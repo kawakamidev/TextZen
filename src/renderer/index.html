@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>TextZen</title>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self' zen-file:; script-src 'unsafe-inline' 'self' zen-file:; style-src 'self' 'unsafe-inline' zen-file:; img-src * 'self' data: zen-file:;"
+    />
+    <script type="module">
+      window.textZen = {}
+      window.textZenInternal = {}
+
+      const scripts = await window.api.getJs()
+      for (const src of scripts) {
+        try {
+          await import(
+            /* @vite-ignore */
+            src
+          )
+        } catch (e) {
+          console.error(`Failed to import ${src}:`, e)
+        }
+      }
+      const styles = await window.api.getCss()
+      for (const css of styles) {
+        try {
+          const tag = document.createElement('link')
+          tag.rel = 'stylesheet'
+          tag.href = css
+          document.querySelector('head').appendChild(tag)
+        } catch (e) {
+          console.log(`Filed to import ${css}:`, e)
+        }
+      }
+    </script>
+  </head>
+
+  <body style="overflow: hidden; height: 100vh">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

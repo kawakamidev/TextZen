@@ -1,0 +1,249 @@
+@import 'tailwindcss';
+
+a,
+button,
+input {
+  -webkit-app-region: no-drag;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-text-primary: rgb(222, 222, 222);
+    --color-border-primary: rgb(90, 90, 90);
+    --color-bg-primary: rgb(30, 30, 30);
+    --color-bg-active: rgb(240, 240, 240, 0.15);
+    --color-bg-secondary: rgb(50, 50, 50);
+    --color-highlight-purple: rgb(106, 47, 126);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-text-primary: rgba(30, 30, 30);
+    --color-border-primary: rgba(240, 240, 240);
+    --color-bg-primary: rgb(256, 256, 256);
+    --color-bg-active: rgb(0, 0, 0, 0.05);
+    --color-bg-secondary: rgb(240, 240, 240);
+    --color-highlight-purple: rgb(245, 214, 255);
+  }
+}
+
+* {
+  @apply placeholder:text-gray-300;
+}
+
+* {
+  scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+}
+
+*::-webkit-scrollbar {
+  -webkit-app-region: no-drag;
+}
+
+html {
+  @apply h-screen overflow-hidden text-[var(--color-text-primary)];
+}
+
+.cm-focused {
+  @apply !outline-none;
+}
+
+.cm-activeLine {
+  @apply !bg-transparent;
+}
+
+.cm-editor {
+  @apply !h-auto !max-h-none bg-[var(--color-bg-primary)];
+}
+
+.cm-scroller {
+  font-family: BlinkMacSystemFont, 'Segoe UI Symbol' !important;
+  @apply p-2 pt-0 min-h-[calc(100vh-100px)] pb-[calc(100vh-100px)];
+}
+
+.cm-panels-bottom {
+  @apply !sticky !right-0 !left-0;
+}
+
+.cm-search {
+  @apply text-[14px];
+}
+
+.cm-search label {
+  @apply inline-flex items-center;
+}
+
+main {
+  @apply text-[10pt] pt-0 flex grow;
+}
+
+article {
+  @apply w-full h-screen overflow-y-scroll bg-[var(--color-bg-primary)];
+}
+
+.ep {
+  @apply w-full grow bg-[var(--color-bg-primary)]  p-20 flex text-[10pt] items-center justify-center h-[calc(100vh-48px)];
+}
+
+.tf {
+  @apply outline-none text-lg p-3 pb-0 resize-none w-full font-semibold;
+}
+
+.folder {
+  @apply font-bold;
+}
+
+.file {
+  @apply text-xs;
+}
+
+header {
+  @apply sticky justify-between top-0 z-10 text-[10pt] flex items-center px-3 h-[48px] shadow-sm gap-2  bg-[var(--color-bg-secondary)];
+  -webkit-app-region: drag;
+}
+
+.header-title {
+  @apply leading-[10px];
+}
+
+.header-title--r {
+  @apply ml-[80px];
+}
+
+.header-btns {
+  @apply flex gap-2;
+}
+
+.setup {
+  @apply p-20 flex text-[10pt] items-center justify-center h-[calc(100vh-30px)] bg-[var(--color-bg-primary)];
+}
+
+.container {
+  @apply flex gap-2 items-center justify-center;
+}
+
+.t-button {
+  @apply hover:bg-[var(--color-bg-active)] rounded py-1 px-2 transition-all;
+}
+
+.shortcut {
+  @apply flex gap-1 items-center;
+}
+
+.keyboard {
+  @apply border border-[var(--color-border-primary)] bg-[var(--color-bg-secondary)] w-6 flex items-center h-6 shadow rounded p-2 justify-center;
+}
+
+aside {
+  @apply select-none border-r border-[var(--color-border-primary)] max-w-none;
+}
+
+.s-h {
+  @apply h-[48px];
+  -webkit-app-region: drag;
+}
+
+.fl {
+  @apply h-[calc(100vh-40px)] relative pb-2;
+}
+
+.fi {
+  @apply h-full w-full block leading-[16px] text-left cursor-default rounded px-2 py-1 items-center overflow-hidden truncate text-[var(--color-text-primary)];
+}
+
+.fi--active {
+  @apply bg-[var(--color-bg-active)];
+}
+
+.fs-c {
+  @apply fixed top-4 left-1/2 -translate-x-1/2 bg-[var(--color-bg-secondary)] z-20 shadow-lg rounded max-w-[500px] w-full border border-[var(--color-border-primary)];
+}
+
+.fs-f-w {
+  @apply p-2;
+}
+
+.fs-f {
+  @apply border gap-1 dark:bg-[var(--color-bg-secondary)] border-[var(--color-border-primary)] rounded p-1 flex items-center w-full;
+}
+
+.i-button {
+  @apply rounded p-1 flex items-center transition-all hover:bg-[var(--color-bg-active)];
+}
+
+.fs-l {
+  @apply gap-1 pb-2 max-h-[300px] overflow-scroll;
+}
+
+.fs-i-w {
+  @apply px-2;
+}
+
+.fs-i {
+  @apply p-1 block;
+}
+
+.fs-i {
+  @apply p-1 block;
+}
+
+.fs-i--active {
+  @apply bg-[var(--color-bg-active)];
+}
+
+.cm-completionIcon {
+  @apply !hidden;
+}
+
+.cm-textfield {
+  @apply rounded;
+}
+
+.cm-button {
+  @apply !bg-[var(--color-bg-primary)] !border !border-[var(--color-border-primary)] !rounded;
+  background-image: none !important;
+}
+
+input[type='checkbox'] {
+  @apply border !border-[var(--color-border-primary)];
+}
+
+.highlight {
+  @apply bg-[var(--color-highlight-purple)];
+}
+
+.fts {
+  @apply min-h-[calc(100vh-120px)];
+}
+
+.fts-nf {
+  @apply min-h-[calc(100vh-120px)];
+}
+
+.fts-rc {
+  @apply py-4 px-2 cursor-default;
+}
+
+.fts-title {
+  @apply text-[12pt] font-semibold cursor-default p-1;
+}
+
+.fts-line {
+  @apply text-[var(--color-text-primary)] cursor-default block p-2 rounded;
+}
+
+.fts-result {
+  @apply min-h-[calc(100vh-96x)] px-5 py-2 divide-y divide-[var(--color-border-primary)];
+}
+
+.fts-header {
+  @apply p-2 shadow-sm sticky top-[48px] bg-[var(--color-bg-primary)];
+}
+
+.fts-field {
+  @apply rounded-lg px-2 py-1 w-full border border-[var(--color-border-primary)];
+}
+
+.fts-line--active {
+  @apply bg-[var(--color-bg-active)];
+}
