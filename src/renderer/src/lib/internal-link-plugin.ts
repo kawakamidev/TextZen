@@ -11,7 +11,7 @@ import { Extension, Range } from '@codemirror/state'
 import { syntaxTree } from '@codemirror/language'
 import { SyntaxNode } from '@lezer/common'
 
-const defaultRegexp = /\[\[(.+)\]\]/gi
+const defaultRegexp = /\[\[(.+?)\]\]/gi
 
 export interface HyperLinkState {
   at: number
@@ -32,6 +32,7 @@ class InternalLinkIcon extends WidgetType {
     const wrapper = document.createElement('a')
     wrapper.href = '#'
     wrapper.className = 'cm-internal-link-icon'
+    wrapper.ariaLabel = this.state.path
     wrapper.addEventListener('click', () => {
       window.api.navigateFile(this.state.path)
     })
