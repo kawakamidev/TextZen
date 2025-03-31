@@ -47,7 +47,7 @@ test.describe('数式の表示', () => {
     await expect(page.getByText('where a and b are the legs')).toBeVisible()
   })
 
-  test('カーソルを近づけると数式が編集可能になること', async ({ page }) => {
+  test('同じ行にカーソルを置くと数式が編集可能になること', async ({ page }) => {
     // 数式のテストファイルを開く
     await page.getByRole('link', { name: 'math' }).click()
     
@@ -58,7 +58,7 @@ test.describe('数式の表示', () => {
     // 数式の直前の文字列を見つけてクリック
     await page.getByText('Pythagoras theorem states that').click({ position: { x: 10, y: 5 } })
     
-    // カーソルを右に移動して数式に近づける
+    // カーソルを右に移動して同じ行に置く
     await page.keyboard.press('End')
     await page.waitForTimeout(500) // カーソル移動後の更新を待つ
     
