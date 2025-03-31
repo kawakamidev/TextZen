@@ -3,6 +3,7 @@ import { handleDirOpen } from '../listeners/handle-dir-open'
 import { handleSearchFile } from '../listeners/handle-search'
 import { mainWindow } from '..'
 import { store } from './store'
+import { getShortcut, shortcutToAccelerator } from './shortcuts'
 
 export const createMenu = async (intl): Promise<Menu> => {
   const template = [
@@ -33,32 +34,32 @@ export const createMenu = async (intl): Promise<Menu> => {
         {
           click: handleDirOpen,
           label: intl.formatMessage({ id: 'openDir' }),
-          accelerator: 'Cmd+O'
+          accelerator: shortcutToAccelerator(getShortcut('openDirectory'))
         },
         {
           click: (): void => {
             mainWindow?.webContents.send('new')
           },
           label: intl.formatMessage({ id: 'new' }),
-          accelerator: 'Cmd+N'
+          accelerator: shortcutToAccelerator(getShortcut('newFile'))
         },
         { type: 'separator' },
         {
           click: handleSearchFile,
           label: intl.formatMessage({ id: 'search' }),
-          accelerator: 'Cmd+P'
+          accelerator: shortcutToAccelerator(getShortcut('searchFile'))
         },
         {
           id: 'toggle-search-full-text',
           click: (): void => mainWindow?.webContents.send('toggle-search-full-text'),
           label: intl.formatMessage({ id: 'searchFullText' }),
-          accelerator: 'Cmd+Shift+F'
+          accelerator: shortcutToAccelerator(getShortcut('searchFullText'))
         },
         {
           id: 'back-link',
           click: (): void => mainWindow?.webContents.send('back-link'),
           label: intl.formatMessage({ id: 'backLink' }),
-          accelerator: 'Cmd+Shift+B'
+          accelerator: shortcutToAccelerator(getShortcut('backLinks'))
         },
         { type: 'separator' },
         { role: 'close', label: intl.formatMessage({ id: 'close' }) }
@@ -92,7 +93,7 @@ export const createMenu = async (intl): Promise<Menu> => {
             mainWindow?.webContents.send('toggle-sidebar', store.get('view.sidebar.visible'))
           },
           label: intl.formatMessage({ id: 'sidebar' }),
-          accelerator: 'Cmd+B',
+          accelerator: shortcutToAccelerator(getShortcut('toggleSidebar')),
           checked: await store.get('view.sidebar.visible')
         },
         { type: 'separator' },
