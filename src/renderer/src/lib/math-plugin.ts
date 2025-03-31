@@ -106,8 +106,10 @@ function mathPlugin(view: EditorView): DecorationSet {
     const tree = syntaxTree(view.state)
     const isInCodeBlock = tree.resolve(from, 1).name.includes('CodeText')
 
-    // Check if cursor is near this formula - increase detection range
-    const cursorIsNear = Math.abs(cursor - from) < 10 || Math.abs(cursor - to) < 10
+    // Check if cursor is on the same line as the formula
+    const fromLine = view.state.doc.lineAt(from)
+    const cursorLine = view.state.doc.lineAt(cursor)
+    const cursorIsNear = fromLine.number === cursorLine.number
 
     if (!isInCodeBlock && !cursorIsNear) {
       // Render formula normally if cursor is not near
