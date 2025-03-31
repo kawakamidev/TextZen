@@ -19,7 +19,8 @@
     "start": "electron-vite preview",
     "dev": "electron-vite dev",
     "postinstall": "electron-builder install-app-deps",
-    "build": "electron-vite build && electron-builder --mac"
+    "build": "electron-vite build && electron-builder --mac",
+    "build:local": "electron-vite build"
   },
   "dependencies": {
     "@codemirror/lang-markdown": "^6.3.2",
