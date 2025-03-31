@@ -9,6 +9,7 @@ import { internalLink } from '@renderer/lib/internal-link-plugin'
 import { markdownImagePlugin } from '@renderer/lib/markdown-image-plugin'
 import { mermaidPlugin } from '@renderer/lib/mermaid-plugin'
 import { tablePreviewPlugin } from '@renderer/lib/table-plugin'
+import { mathFormulaPlugin } from '@renderer/lib/math-plugin'
 import CodeMirror, { EditorView } from '@uiw/react-codemirror'
 import { KeyboardEventHandler, useCallback, useContext, useEffect, useMemo } from 'react'
 import * as thememirror from 'thememirror'
@@ -105,7 +106,8 @@ export default function BodyField({ value, onChange, onKeyDownCapture }: Props):
         }),
         theme,
         mermaidPlugin,
-        tablePreviewPlugin
+        tablePreviewPlugin,
+        mathFormulaPlugin
       ]}
       onChange={onChange}
       ref={bodyEditor}

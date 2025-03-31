@@ -5,8 +5,9 @@
     <title>TextZen</title>
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self' zen-file:; script-src 'unsafe-inline' 'self' zen-file:; style-src 'self' 'unsafe-inline' zen-file:; img-src * 'self' data: zen-file:;"
+      content="default-src 'self' zen-file:; script-src 'unsafe-inline' 'self' zen-file:; style-src 'self' 'unsafe-inline' zen-file: https://cdn.jsdelivr.net; img-src * 'self' data: zen-file:; font-src 'self' https://cdn.jsdelivr.net"
     />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
     <script type="module">
       window.textZen = {}
       window.textZenInternal = {}
