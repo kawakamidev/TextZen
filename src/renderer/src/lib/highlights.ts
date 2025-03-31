@@ -32,7 +32,7 @@ let specs = [
   { tag: tags.invalid, color: isDark ? '#f00' : '#f00' }
 ]
 
-if (window.textZen?.codemirror.styles) {
+if (window.textZen?.codemirror.styles.length > 0) {
   specs = window.textZen.codemirror.styles
 }
 
