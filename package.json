@@ -50,7 +50,7 @@
     "react-intl": "^7.1.10",
     "react-material-symbols": "^4.4.0",
     "react-router": "^7.4.0",
-    "react-textarea-autosize": "^8.5.8",
+    "react-textarea-autosize": "^8.5.9",
     "react-window": "^1.8.11",
     "rehype-stringify": "^10.0.1",
     "remark-gfm": "^4.0.1",
