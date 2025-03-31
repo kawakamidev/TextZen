@@ -9,7 +9,7 @@ import {
 } from '@codemirror/view'
 import { Extension, Range } from '@codemirror/state'
 
-const defaultRegexp = /\b((?:https?|ftp):\/\/[^\s/$.?#].[^\s\n]*)/gi
+const defaultRegexp = /\b((?:https?|ftp):\/\/[^\s/$.?#].[^\s\n)]*)\b/gi
 
 export interface HyperLinkState {
   at: number

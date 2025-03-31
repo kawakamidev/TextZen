@@ -7,6 +7,8 @@ release
 *.log*
 .env
 
+coverage
+
 # Playwright
 /test-results/
 /playwright-report/
