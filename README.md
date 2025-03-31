@@ -51,6 +51,19 @@ Press `⌘+Shift+B` to check references to the current file.
 
 TextZen follows [GFM (GitHub Flavored Markdown)](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) standards.
 
+### Math Equations
+
+TextZen supports writing and rendering mathematical equations using KaTeX. You can use both inline and block math syntax:
+
+Inline math: `$a^2 + b^2 = c^2$`
+
+Block math:
+```markdown
+$$
+\frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+$$
+```
+
 ### Mermaid.js
 
 [Mermaid.js](https://mermaid.js.org/) is supported.

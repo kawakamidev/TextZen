@@ -212,6 +212,34 @@ input[type='checkbox'] {
   @apply bg-[var(--color-highlight-purple)];
 }
 
+/* Math formula plugin styles */
+.math-formula {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  cursor: help;
+  transition: all 0.2s ease;
+}
+
+.math-formula:hover {
+  outline: 1px solid var(--color-border-primary);
+  border-radius: 3px;
+}
+
+.math-inline {
+  margin: 0 2px;
+}
+
+.math-block {
+  display: block;
+  margin: 8px auto;
+  text-align: center;
+}
+
+.math-error {
+  @apply text-red-500 border-b border-dashed border-red-500;
+}
+
 .fts {
   @apply min-h-[calc(100vh-120px)];
 }
