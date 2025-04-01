@@ -21,6 +21,20 @@ import { handleFileCopy } from './listeners/handle-file-copy'
 import { updateElectronApp } from 'update-electron-app'
 import log from 'electron-log/main.js'
 import { setupShortcutHandlers } from './listeners/handle-shortcuts'
+import { FSWatcher } from 'chokidar'
+import { cleanupWatchers } from './lib/file-watcher'
+
+// グローバル型定義
+declare global {
+  interface globalThis {
+    lastWriteTime: number
+    files: Array<{ id: string; filename: string; mtime: number }>
+    chokidarWatcher: FSWatcher | null
+    currentFileWatcher: FSWatcher | null
+    currentWatchedFile: string | null
+    filePollingTimer: NodeJS.Timeout | null
+  }
+}
 
 let mainWindow: BrowserWindow
 
@@ -91,12 +105,19 @@ app.whenReady().then(async () => {
   ipcMain.handle('getCss', handleCssGet)
   ipcMain.handle('copy-file', handleFileCopy)
   ipcMain.handle('searchFullText', handleFullTextSearch)
-  
+
   // ショートカットキー関連のハンドラを設定
   setupShortcutHandlers()
 })
 
 app.on('window-all-closed', () => {
+  cleanupWatchers()
+
+  if (globalThis.chokidarWatcher) {
+    globalThis.chokidarWatcher.close()
+    globalThis.chokidarWatcher = null
+  }
+
   if (process.platform !== 'darwin') {
     app.quit()
   }
