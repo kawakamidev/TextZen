@@ -31,7 +31,13 @@ const api = {
     })
   },
   searchFullText: (query: string): Promise<Array<SearchResult>> =>
-    ipcRenderer.invoke('searchFullText', query)
+    ipcRenderer.invoke('searchFullText', query),
+  getShortcut: (key: string): Promise<string> => 
+    ipcRenderer.invoke('getShortcut', key),
+  getAllShortcuts: (): Promise<Record<string, string>> => 
+    ipcRenderer.invoke('getAllShortcuts'),
+  setShortcut: (key: string, value: string): Promise<void> => 
+    ipcRenderer.invoke('setShortcut', key, value)
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to

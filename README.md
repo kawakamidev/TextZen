@@ -47,6 +47,24 @@ Click on search results to jump to the corresponding location in the file.
 
 Press `⌘+Shift+B` to check references to the current file.
 
+### 6. Customize Keyboard Shortcuts
+
+You can customize keyboard shortcuts in two ways:
+
+1. Use the settings UI: Click `TextZen > Keyboard Shortcuts` in the menu to open the keyboard shortcuts configuration dialog.
+2. Edit the settings file: Modify the `shortcuts` section in the JSON settings file.
+
+Default shortcuts:
+
+- `⌘+O`: Open Directory
+- `⌘+N`: New File
+- `⌘+P`: Search Files
+- `⌘+Shift+F`: Full-text Search
+- `⌘+Shift+B`: View Backlinks
+- `⌘+B`: Toggle Sidebar
+- `⌘+0`: Focus File List
+- `⌘+1`: Focus Editor
+
 ## Syntax
 
 TextZen follows [GFM (GitHub Flavored Markdown)](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) standards.
@@ -112,6 +130,16 @@ Click `TextZen > Settings (JSON)` in the menu to open the settings JSON file in 
   "general": {
     "path": "/path/to/notes"
   },
+  "shortcuts": {
+    "openDirectory": "Cmd+O",
+    "newFile": "Cmd+N",
+    "searchFile": "Cmd+P",
+    "searchFullText": "Cmd+Shift+F",
+    "backLinks": "Cmd+Shift+B",
+    "toggleSidebar": "Cmd+B",
+    "focusFileList": "Cmd+0",
+    "focusEditor": "Cmd+1"
+  }
 }
 ```
 

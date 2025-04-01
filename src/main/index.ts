@@ -20,6 +20,7 @@ import { handleCssGet } from './listeners/handle-css-get'
 import { handleFileCopy } from './listeners/handle-file-copy'
 import { updateElectronApp } from 'update-electron-app'
 import log from 'electron-log/main.js'
+import { setupShortcutHandlers } from './listeners/handle-shortcuts'
 
 let mainWindow: BrowserWindow
 
@@ -90,6 +91,9 @@ app.whenReady().then(async () => {
   ipcMain.handle('getCss', handleCssGet)
   ipcMain.handle('copy-file', handleFileCopy)
   ipcMain.handle('searchFullText', handleFullTextSearch)
+  
+  // ショートカットキー関連のハンドラを設定
+  setupShortcutHandlers()
 })
 
 app.on('window-all-closed', () => {
