@@ -199,12 +199,8 @@ export default function Sidebar({ files, isVisible }: Props): JSX.Element {
     })
   }, [listRef])
 
-  if (!isVisible) {
-    return <></>
-  }
-
   return (
-    <aside style={{ width: `${width}px` }}>
+    <aside style={{ width: `${isVisible ? width : 0}px` }}>
       <div className="s-h"></div>
       <div ref={listRef} className="fl">
         <FixedSizeList height={listHeight} width="100%" itemCount={files.length} itemSize={24}>
