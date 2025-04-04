@@ -1,4 +1,4 @@
-import { ReactCodeMirrorRef } from '@uiw/react-codemirror'
+import { Extension, ReactCodeMirrorRef } from '@uiw/react-codemirror'
 import { createContext, Dispatch, SetStateAction } from 'react'
 
 interface ContextType {
@@ -8,6 +8,8 @@ interface ContextType {
   setIsVisible: (value: boolean) => void
   current: string | null
   setCurrent: Dispatch<SetStateAction<string | null>>
+  setEditorExtensions: (Extension) => void
+  editorExtensions: Extension[]
 }
 
 export const EditorContext = createContext<ContextType>({
@@ -16,5 +18,7 @@ export const EditorContext = createContext<ContextType>({
   isVisible: true,
   setIsVisible: () => {},
   current: null,
-  setCurrent: () => {}
+  setCurrent: () => {},
+  setEditorExtensions: () => {},
+  editorExtensions: []
 })

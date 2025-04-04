@@ -15,6 +15,7 @@ export default function App(): JSX.Element {
   const [focus, setFocus] = useState<FocusTarget>('fileList')
   const [currentListItem, setCurrentListItem] = useState<string | null>(null)
   const [current, setCurrent] = useState<string | null>(null)
+  const [editorExtensions, setEditorExtensions] = useState([])
 
   const toggleFocus = (value): void => {
     if (value === focus) {
@@ -36,7 +37,9 @@ export default function App(): JSX.Element {
           isVisible: isEditorVisible,
           setIsVisible: setIsEditorVisible,
           current,
-          setCurrent
+          setCurrent,
+          setEditorExtensions,
+          editorExtensions
         }}
       >
         <FocusContext.Provider
