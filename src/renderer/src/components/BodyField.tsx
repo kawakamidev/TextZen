@@ -23,7 +23,7 @@ interface Props {
 window.EditContext = false
 
 export default function BodyField({ value, onChange, onKeyDownCapture }: Props): JSX.Element {
-  const { bodyEditor, isVisible } = useContext(EditorContext)
+  const { bodyEditor, isVisible, setEditorExtensions, editorExtensions } = useContext(EditorContext)
 
   const insertImage = useCallback(
     (name, pos): void => {
@@ -40,27 +40,30 @@ export default function BodyField({ value, onChange, onKeyDownCapture }: Props):
     [bodyEditor]
   )
 
-  const handleFileDrop = (e): void => {
-    e.preventDefault()
+  const handleFileDrop = useCallback(
+    (e): void => {
+      e.preventDefault()
 
-    const items = e.dataTransfer!.items!
-    for (let i = 0; i < items.length; i++) {
-      const item = items[i].webkitGetAsEntry()
-      if (item && item.isFile) {
-        new Promise<File>((resolve, reject) => {
-          ;(item as FileSystemFileEntry).file(resolve, reject)
-        }).then((file) => {
-          window.api.copyFile(file).then(() => {
-            const pos = bodyEditor?.current?.view?.posAtCoords({
-              x: e.pageX,
-              y: e.pageY
+      const items = e.dataTransfer!.items!
+      for (let i = 0; i < items.length; i++) {
+        const item = items[i].webkitGetAsEntry()
+        if (item && item.isFile) {
+          new Promise<File>((resolve, reject) => {
+            ;(item as FileSystemFileEntry).file(resolve, reject)
+          }).then((file) => {
+            window.api.copyFile(file).then(() => {
+              const pos = bodyEditor?.current?.view?.posAtCoords({
+                x: e.pageX,
+                y: e.pageY
+              })
+              insertImage(item.name, pos)
             })
-            insertImage(item.name, pos)
           })
-        })
+        }
       }
-    }
-  }
+    },
+    [bodyEditor, insertImage]
+  )
 
   const theme = useMemo(() => {
     if (
@@ -79,6 +82,27 @@ export default function BodyField({ value, onChange, onKeyDownCapture }: Props):
   }, [])
 
   useEffect(() => {
+    setEditorExtensions([
+      markdown({ base: markdownLanguage, codeLanguages: languages }),
+      hyperLink,
+      EditorView.lineWrapping,
+      markdownImagePlugin,
+      internalLink,
+      ...highlights,
+      autocompletion({
+        override: [internalLinkCompletion]
+      }),
+      EditorView.domEventHandlers({
+        drop: handleFileDrop
+      }),
+      theme,
+      mermaidPlugin,
+      tablePreviewPlugin,
+      mathFormulaPlugin
+    ])
+  }, [handleFileDrop, setEditorExtensions, theme])
+
+  useEffect(() => {
     window.textZen.codemirror.view = bodyEditor?.current?.view
     window.textZen.codemirror.state = bodyEditor?.current?.state
     window.textZen.codemirror.editor = bodyEditor?.current?.editor
@@ -91,24 +115,7 @@ export default function BodyField({ value, onChange, onKeyDownCapture }: Props):
   return (
     <CodeMirror
       value={value}
-      extensions={[
-        markdown({ base: markdownLanguage, codeLanguages: languages }),
-        hyperLink,
-        EditorView.lineWrapping,
-        markdownImagePlugin,
-        internalLink,
-        ...highlights,
-        autocompletion({
-          override: [internalLinkCompletion]
-        }),
-        EditorView.domEventHandlers({
-          drop: handleFileDrop
-        }),
-        theme,
-        mermaidPlugin,
-        tablePreviewPlugin,
-        mathFormulaPlugin
-      ]}
+      extensions={editorExtensions}
       onChange={onChange}
       ref={bodyEditor}
       basicSetup={{

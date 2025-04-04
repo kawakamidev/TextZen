@@ -23,6 +23,7 @@
     "build:local": "electron-vite build"
   },
   "dependencies": {
+    "@codemirror/commands": "^6.8.1",
     "@codemirror/lang-markdown": "^6.3.2",
     "@codemirror/language-data": "^6.5.1",
     "@codemirror/state": "^6.5.2",

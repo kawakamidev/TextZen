@@ -5,6 +5,8 @@ import { File } from './Page'
 import { useDebouncedCallback } from 'use-debounce'
 import { EditorContext } from '@renderer/contexts/editorContext'
 import { FocusContext } from '@renderer/contexts/FocusContext'
+import { EditorState } from '@codemirror/state'
+import { historyField } from '@codemirror/commands'
 
 interface Props {
   currentFile: File
@@ -23,9 +25,8 @@ export default function Editor({
   currentTitle,
   onBodyChange
 }: Props): JSX.Element {
-  const [editorVisible, setEditorVisible] = useState(true)
   const [currentBody, setCurrentBody] = useState('')
-  const { bodyEditor, titleEditor } = useContext(EditorContext)
+  const { bodyEditor, titleEditor, editorExtensions } = useContext(EditorContext)
   const { setFocus } = useContext(FocusContext)
 
   const writeFile = useDebouncedCallback(async (t, b, target) => {
@@ -115,15 +116,28 @@ export default function Editor({
     }
   }
 
-  // エディタの編集履歴をリセットする
   useEffect(() => {
     if (!currentFile) {
       return
     }
     window.api.getBody(currentFile.id).then(setCurrentBody)
-    setEditorVisible(false)
-    setTimeout(() => setEditorVisible(true), 1)
-  }, [currentFile, setCurrentTitle])
+
+    if (!bodyEditor?.current?.view?.state) {
+      return
+    }
+
+    bodyEditor?.current?.view?.setState(
+      EditorState.fromJSON(
+        {
+          ...bodyEditor?.current?.view.state.toJSON({ history: historyField }),
+          history
+        },
+        {
+          extensions: editorExtensions
+        }
+      )
+    )
+  }, [bodyEditor, currentFile, setCurrentTitle])
 
   useEffect(() => {
     setCurrentTitle(currentFile.title)
@@ -136,13 +150,11 @@ export default function Editor({
         onChange={handleTitleChange}
         onKeyDown={handleTitleKeyDown}
       />
-      {editorVisible && (
-        <BodyField
-          value={currentBody}
-          onChange={handleUpdate}
-          onKeyDownCapture={handleBodyKeyDownCapture as (keyboardEvent) => void}
-        />
-      )}
+      <BodyField
+        value={currentBody}
+        onChange={handleUpdate}
+        onKeyDownCapture={handleBodyKeyDownCapture as (keyboardEvent) => void}
+      />
     </div>
   )
 }
