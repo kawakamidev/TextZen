@@ -44,7 +44,7 @@
     "electron-store": "^10.0.1",
     "execa": "^9.5.2",
     "fuse.js": "^7.1.0",
-    "html-react-parser": "^5.2.2",
+    "html-react-parser": "^5.2.3",
     "interactjs": "^1.10.27",
     "katex": "^0.16.21",
     "lodash": "^4.17.21",
