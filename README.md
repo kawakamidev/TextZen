@@ -96,14 +96,6 @@ graph TD;
 ```
 ````
 
-### Internal Links
-
-You can create links to other files within the opened folder.
-
-```markdown
-[[target file name]]
-```
-
 ### Preview
 
 Images, links, and tables are parsed and displayed as previews in the editor.
