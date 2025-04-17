@@ -1,11 +1,8 @@
-import { autocompletion } from '@codemirror/autocomplete'
 import { markdown, markdownLanguage } from '@codemirror/lang-markdown'
 import { languages } from '@codemirror/language-data'
 import { EditorContext } from '@renderer/contexts/editorContext'
 import { highlights } from '@renderer/lib/highlights'
 import { hyperLink } from '@renderer/lib/hyper-link-plugin'
-import { internalLinkCompletion } from '@renderer/lib/internal-link-completion'
-import { internalLink } from '@renderer/lib/internal-link-plugin'
 import { markdownImagePlugin } from '@renderer/lib/markdown-image-plugin'
 import { mermaidPlugin } from '@renderer/lib/mermaid-plugin'
 import { tablePreviewPlugin } from '@renderer/lib/table-plugin'
@@ -96,11 +93,7 @@ export default function BodyField({ value, onChange, onKeyDownCapture }: Props):
         hyperLink,
         EditorView.lineWrapping,
         markdownImagePlugin,
-        internalLink,
         ...highlights,
-        autocompletion({
-          override: [internalLinkCompletion]
-        }),
         EditorView.domEventHandlers({
           drop: handleFileDrop
         }),
