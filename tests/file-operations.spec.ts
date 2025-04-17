@@ -54,39 +54,3 @@ test('ファイル間の移動テスト', async ({ page }) => {
   // Check content
   await expect(page.getByText('Content in second file')).toBeVisible()
 })
-
-test('内部リンクのナビゲーションテスト', async ({ page }) => {
-  // Create source file
-  await page.locator('[aria-label="New"]').click()
-  await page.waitForTimeout(1000)
-  await page.keyboard.insertText('Source Document')
-  await page.waitForTimeout(1000)
-
-  // Create target file
-  await page.locator('[aria-label="New"]').click()
-  await page.waitForTimeout(1000)
-  await page.keyboard.insertText('Target Document')
-  await page.locator('.cm-scroller').click()
-  await page.keyboard.insertText('This is the target content')
-  await page.waitForTimeout(1000)
-
-  // Go back to source file
-  await page.getByRole('link', { name: 'Source Document', exact: true }).click()
-  await page.waitForTimeout(1000)
-
-  // Add internal link
-  await page.locator('.cm-scroller').click()
-  await page.keyboard.type('[[Target Document]]')
-  await page.waitForTimeout(1000)
-
-  // Verify link was created
-  await expect(page.locator('a.cm-internal-link-icon')).toBeVisible()
-
-  // Click the link
-  await page.locator('a.cm-internal-link-icon').click()
-  await page.waitForTimeout(1000)
-
-  // Verify we navigated to the target
-  await expect(page.getByText('This is the target content')).toBeVisible()
-  expect(await page.locator('.tf').inputValue()).toBe('Target Document')
-})

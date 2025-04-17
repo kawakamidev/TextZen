@@ -12,26 +12,13 @@ export const initializeConfig = (): void => {
   initialize('view.theme', 'default')
   initialize('edit.linkAutoUpdate', true)
 
-  initialize('prompts', {
-    copyTemplate:
-      (store.get('view.locale') as string) === 'ja'
-        ? '{path} のファイルについて応答してください。'
-        : 'I have a text file at {path}. Please respond to my request.'
-  })
-
-  // デフォルトのショートカットキー設定
   initialize('shortcuts', {
-    // ファイル操作
     openDirectory: 'Cmd+O',
     newFile: 'Cmd+N',
     searchFile: 'Cmd+P',
     searchFullText: 'Cmd+Shift+F',
     backLinks: 'Cmd+Shift+B',
-
-    // 表示
     toggleSidebar: 'Cmd+B',
-
-    // フォーカス
     focusFileList: 'Cmd+0',
     focusEditor: 'Cmd+1'
   })

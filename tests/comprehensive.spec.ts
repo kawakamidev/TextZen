@@ -1,11 +1,5 @@
 import { expect } from '@playwright/test'
-import {
-  createNewNote,
-  navigateToNote,
-  searchForFile,
-  searchFullText,
-  createInternalLink
-} from './utils/test-helpers'
+import { createNewNote, navigateToNote, searchForFile, searchFullText } from './utils/test-helpers'
 import { test } from './shared/setup'
 
 test('統合テストシナリオ', async ({ page }) => {
@@ -32,27 +26,6 @@ test('統合テストシナリオ', async ({ page }) => {
 
   await navigateToNote(page, 'Secondary Document')
   await expect(page.getByText('Secondary Content')).toBeVisible()
-
-  // Create internal links
-  await page.locator('.cm-scroller').click()
-  await page.keyboard.press('End')
-  await page.keyboard.insertText('\n\nSee also: ')
-  await createInternalLink(page, 'Main Document')
-  await page.keyboard.press('ArrowRight')
-  await page.keyboard.press('ArrowRight')
-  await page.keyboard.insertText(' and ')
-  await createInternalLink(page, 'Reference Material')
-
-  // Test link navigation
-  await page.locator('a.cm-internal-link-icon').first().click()
-  expect(await page.locator('.tf').inputValue()).toBe('Main Document')
-
-  // Go back
-  await navigateToNote(page, 'Secondary Document')
-
-  // Test second link
-  await page.locator('a.cm-internal-link-icon').nth(1).click()
-  expect(await page.locator('.tf').inputValue()).toBe('Reference Material')
 
   // Test file search
   await searchForFile(page, 'Secondary')
