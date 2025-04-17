@@ -39,6 +39,7 @@ export const locale = {
     github: 'GitHub',
     openInDefaultApp: 'アプリで開く',
     revealInFinder: 'Finderに表示',
+    copyPath: 'パスをコピー',
     backLink: 'バックリンク'
   },
   en: {
@@ -81,6 +82,7 @@ export const locale = {
     github: 'GitHub',
     openInDefaultApp: 'Open in Default App',
     revealInFinder: 'Reveal in Finder',
+    copyPath: 'Copy Path',
     backLink: 'Back Links'
   }
 }

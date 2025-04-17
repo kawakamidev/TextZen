@@ -1,4 +1,4 @@
-import { Menu, shell } from 'electron'
+import { Menu, shell, clipboard } from 'electron'
 import { join } from 'path'
 import { store } from './store'
 import { mainWindow } from '..'
@@ -32,6 +32,17 @@ export const createContextMenu = (intl, event, id, title): Electron.Menu => {
       click: (): void => {
         const dirPath = store.get('general.path') as string
         shell.showItemInFolder(join(dirPath, `${title}.md`))
+      }
+    },
+    {
+      type: 'separator'
+    },
+    {
+      label: intl.formatMessage({ id: 'copyPath' }),
+      click: (): void => {
+        const dirPath = store.get('general.path') as string
+        const fullPath = join(dirPath, `${title}.md`)
+        clipboard.writeText(fullPath)
       }
     },
     {
