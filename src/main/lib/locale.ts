@@ -40,6 +40,7 @@ export const locale = {
     openInDefaultApp: 'アプリで開く',
     revealInFinder: 'Finderに表示',
     copyPath: 'パスをコピー',
+    copyPrompt: 'プロンプトをコピー',
     backLink: 'バックリンク'
   },
   en: {
@@ -83,6 +84,7 @@ export const locale = {
     openInDefaultApp: 'Open in Default App',
     revealInFinder: 'Reveal in Finder',
     copyPath: 'Copy Path',
+    copyPrompt: 'Copy as Prompt',
     backLink: 'Back Links'
   }
 }

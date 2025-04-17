@@ -46,6 +46,16 @@ export const createContextMenu = (intl, event, id, title): Electron.Menu => {
       }
     },
     {
+      label: intl.formatMessage({ id: 'copyPrompt' }),
+      click: (): void => {
+        const dirPath = store.get('general.path') as string
+        const fullPath = join(dirPath, `${title}.md`)
+        const prompts = store.get('prompts') as { copyTemplate: string }
+        const template = prompts.copyTemplate
+        clipboard.writeText(template.replace('{path}', fullPath))
+      }
+    },
+    {
       type: 'separator'
     },
     {
