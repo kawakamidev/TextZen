@@ -58,7 +58,7 @@ export default function Editor({
   }
 
   const handleTitleKeyDown = (e): void => {
-    if (e.isComposing) {
+    if (e.isComposing || e.key === 'Process' || e.keyCode === 229) {
       return
     }
     if (e.keyCode === 13) {
@@ -89,13 +89,7 @@ export default function Editor({
   }
 
   const handleBodyKeyDownCapture = (e: KeyboardEvent): void => {
-    if (e.key === 'Escape' || e.key === 'Enter') {
-      window.isCompleting = false
-    }
-    if (e.isComposing) {
-      return
-    }
-    if (window.isCompleting) {
+    if (e.isComposing || e.key === 'Process' || e.keyCode === 229) {
       return
     }
     if (e.key === 'ArrowUp' || (e.ctrlKey && e.key == 'p')) {

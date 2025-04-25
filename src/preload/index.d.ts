@@ -49,7 +49,6 @@ declare global {
     api: API
     textZen: TextZen
     EditContext: boolean
-    isCompleting: boolean
     textZenInternal: TextZenInternal
   }
 }
