@@ -134,6 +134,7 @@ export default function Editor({
         <BodyField
           value={currentBody}
           onChange={handleUpdate}
+          file={currentFile}
           onKeyDownCapture={handleBodyKeyDownCapture as (keyboardEvent) => void}
         />
       )}
