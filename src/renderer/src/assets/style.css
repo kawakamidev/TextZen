@@ -82,7 +82,7 @@ article {
 }
 
 .ep {
-  @apply w-full grow bg-[var(--color-bg-primary)]  p-20 flex text-[10pt] items-center justify-center h-[calc(100vh-48px)];
+  @apply z-[100] w-full grow bg-[var(--color-bg-primary)]  p-20 flex text-[10pt] items-center justify-center h-[calc(100vh-48px)];
 }
 
 .tf {

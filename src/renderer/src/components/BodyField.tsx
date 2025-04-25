@@ -10,17 +10,23 @@ import { mathFormulaPlugin } from '@renderer/lib/math-plugin'
 import CodeMirror, { EditorView } from '@uiw/react-codemirror'
 import { KeyboardEventHandler, useCallback, useContext, useEffect, useMemo } from 'react'
 import * as thememirror from 'thememirror'
+import { historyField } from '@codemirror/commands'
+import { File as FileType } from './Page'
+
+const stateFields = { history: historyField }
 
 interface Props {
   value: string
   onChange: (value: string) => void
   onKeyDownCapture: KeyboardEventHandler<HTMLDivElement>
+  file: FileType
 }
 
 window.EditContext = false
 
-export default function BodyField({ value, onChange, onKeyDownCapture }: Props): JSX.Element {
+export default function BodyField({ value, onChange, onKeyDownCapture, file }: Props): JSX.Element {
   const { bodyEditor, isVisible } = useContext(EditorContext)
+  const serializedState = localStorage.getItem(`editor-state/${file.id}`)
 
   const insertImage = useCallback(
     (name, pos): void => {
@@ -102,12 +108,24 @@ export default function BodyField({ value, onChange, onKeyDownCapture }: Props):
         tablePreviewPlugin,
         mathFormulaPlugin
       ]}
-      onChange={onChange}
+      onChange={(value, viewUpdate) => {
+        const state = viewUpdate.state.toJSON(stateFields)
+        localStorage.setItem(`editor-state/${file.id}`, JSON.stringify(state))
+        onChange(value)
+      }}
       ref={bodyEditor}
       basicSetup={{
         lineNumbers: false,
         foldGutter: false
       }}
+      initialState={
+        serializedState
+          ? {
+              json: JSON.parse(serializedState || ''),
+              fields: stateFields
+            }
+          : undefined
+      }
       onKeyDownCapture={onKeyDownCapture}
     />
   )
