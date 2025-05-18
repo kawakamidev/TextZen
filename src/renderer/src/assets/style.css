@@ -19,7 +19,7 @@ input {
 
 @media (prefers-color-scheme: light) {
   :root {
-    --color-text-primary: rgba(30, 30, 30);
+    --color-text-primary: rgba(20, 20, 20);
     --color-border-primary: rgba(240, 240, 240);
     --color-bg-primary: rgb(256, 256, 256);
     --color-bg-active: rgb(0, 0, 0, 0.05);
@@ -57,7 +57,7 @@ html {
 }
 
 .cm-scroller {
-  font-family: BlinkMacSystemFont, 'Segoe UI Symbol' !important;
+  font-family: Arial, Helvetica, sans-serif;
   @apply p-2 pt-0 min-h-[calc(100vh-100px)] pb-[calc(100vh-100px)];
 }
 
